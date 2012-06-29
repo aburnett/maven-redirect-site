@@ -1,0 +1,40 @@
+#set( $redirectTarget = $decoration.custom.getChild( 'redirectTarget' ).getValue() )
+#set( $debug = $decoration.custom.getChild( 'debug' ).getValue() )
+<!DOCTYPE html>
+<html>
+<head>  
+    #if (${redirectTarget})    
+      <meta http-equiv="Refresh" content="0;url=${redirectTarget}" />
+    #end
+</head>
+<body> 
+  #if (${redirectTarget})    
+    <p>Redirecting to <a href="${redirectTarget}">${redirectTarget}</a></p>
+  #else
+    <p>You must specify a redirectTarget in your src/site/site.xml<p>
+    <code>                                                           
+      <pre>
+&lt;?xml version="1.0"?&gt;
+&lt;project&gt;
+  &lt;custom&gt;
+    &lt;redirectTarget&gt;${confluence.dev}/${project.name}&lt;/redirectTarget&gt;
+  &lt;custom&gt;
+  &lt;skin&gt;
+    &lt;groupId&gt;com.dealer.build&lt;/groupId&gt;
+    &lt;artifactId&gt;redirect-site&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;/skin&gt;  
+&lt;/project&gt;
+</pre>
+</code> 
+  #end 
+
+#if (${debug})     
+<pre>
+Debug:  
+  ${decoration}
+</pre> 
+#end
+
+</body>
+</html>
